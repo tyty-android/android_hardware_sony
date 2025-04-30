@@ -1,9 +1,5 @@
-# Charger
-attribute hal_sony_charger;
-attribute hal_sony_charger_client;
-attribute hal_sony_charger_server;
-
 # HALs
+vendor_hal_attribute(somc_charger)
 vendor_hal_attribute(disp)
 vendor_hal_attribute(idd)
 vendor_hal_attribute(miscta)
