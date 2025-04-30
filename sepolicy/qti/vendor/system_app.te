@@ -11,5 +11,3 @@ allow system_app vendor_hal_miscta_service:service_manager find;
 allow system_app vendor_hal_disp_default:binder { call transfer };
 
 allow vendor_hal_disp_default system_app:binder { call transfer };
-
-allow vendor_hal_disp_default system_app:service_manager find;
