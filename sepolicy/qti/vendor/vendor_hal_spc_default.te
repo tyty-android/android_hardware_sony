@@ -7,3 +7,9 @@ init_daemon_domain(vendor_hal_spc_default)
 binder_use(vendor_hal_spc_default)
 
 get_prop(vendor_hal_spc_default, vendor_tee_listener_prop)
+
+allow vendor_hal_spc_default tad_socket:sock_file write;
+
+allow vendor_hal_spc_default tad_socket:sock_file { create open getattr setattr unlink };
+
+allow vendor_hal_spc_default tad:unix_stream_socket { connectto read write };
