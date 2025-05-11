@@ -1,0 +1,4 @@
+# Allow XperiaCharger to r/w battery supply
+allow system_app vendor_sysfs_battery_supply:file rw_file_perms;
+allow system_app vendor_sysfs_battery_supply:dir search;
+allow system_app sysfs_battchg_ext:dir search;

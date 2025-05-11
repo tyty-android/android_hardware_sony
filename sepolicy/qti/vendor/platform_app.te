@@ -1,0 +1,9 @@
+allow platform_app vendor_hal_miscta_service:service_manager find;
+
+allow platform_app vendor_hal_idd_hwservice:hwservice_manager find;
+
+allow platform_app vendor_hal_somc_charger_hwservice:hwservice_manager find;
+
+allow platform_app vendor_sysfs_graphics:dir search;
+
+allow platform_app vendor_sysfs_graphics:file { read open getattr };

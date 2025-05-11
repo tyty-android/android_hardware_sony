@@ -1,0 +1,22 @@
+aidl_interface {
+    name: "vendor.semc.hardware.aidldisplay",
+    vendor_available: true,
+    srcs: [
+        "vendor/semc/hardware/aidldisplay/*.aidl",
+    ],
+    stability: "vintf",
+    backend: {
+        java: {
+            sdk_version: "module_current",
+            min_sdk_version: "30",
+        },
+    },
+    owner: "sony",
+    versions_with_info: [
+        {
+            version: "1",
+            imports: [],
+        },
+    ],
+    frozen: true,
+}

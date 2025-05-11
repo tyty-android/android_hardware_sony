@@ -3,6 +3,8 @@ type tad_exec, exec_type, vendor_file_type, file_type;
 
 init_daemon_domain(tad)
 
+allow tad tad_socket:sock_file { create unlink };
+
 allow tad init:unix_stream_socket { listen accept };
 
 allow tad block_device:dir search;
