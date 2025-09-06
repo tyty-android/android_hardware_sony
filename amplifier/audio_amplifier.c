@@ -1,17 +1,7 @@
 /*
- * Copyright (C) 2020, AngeloGioacchino Del Regno <kholk11@gmail.com>
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * SPDX-FileCopyrightText: 2020 AngeloGioacchino Del Regno <kholk11@gmail.com>
+ * SPDX-FileCopyrightText: 2020-2025 The LineageOS Project
+ * SPDX-License-Identifier: Apache-2.0
  */
 
 #define LOG_TAG "audio_amplifier_cs35l41_sony"
@@ -49,6 +39,13 @@ typedef struct amp_device {
     struct audio_device* adev;
     struct audio_usecase* usecase_tx;
     struct pcm* cs35l41_out;
+    const struct hw_module_t *module_ahal;
+    typeof(enable_snd_device)* enable_snd_device;
+    typeof(enable_audio_route)* enable_audio_route;
+    typeof(disable_snd_device)* disable_snd_device;
+    typeof(disable_audio_route)* disable_audio_route;
+    typeof(platform_get_pcm_device_id)* platform_get_pcm_device_id;
+    typeof(platform_check_and_set_codec_backend_cfg)* platform_check_and_set_codec_backend_cfg;
 } cs35l41_t;
 static cs35l41_t* cs35l41_dev = NULL;
 
@@ -171,8 +168,8 @@ struct pcm_config pcm_config_cirrus_rx = {
 static struct cirrus_playback_session handle;
 uint8_t cal_ambient[4];
 
-static void* cirrus_do_calibration();
-static void* cirrus_failure_detect_thread();
+static void* cirrus_do_calibration(UNUSED void* _handle);
+static void* cirrus_failure_detect_thread(UNUSED void* _handle);
 
 static int get_ta_array(uint32_t unit, void* arr, bool reverse) {
     uint32_t ta_sz = 0;
@@ -488,12 +485,13 @@ static int cirrus_play_silence(int seconds) {
     uc_info_rx->out_snd_device = SND_DEVICE_OUT_SPEAKER_PROTECTED;
     list_add_tail(&adev->usecase_list, &uc_info_rx->list);
 
-    platform_check_and_set_codec_backend_cfg(adev, uc_info_rx, uc_info_rx->out_snd_device);
+    cs35l41_dev->platform_check_and_set_codec_backend_cfg(adev, uc_info_rx,
+                                                          uc_info_rx->out_snd_device);
 
-    enable_snd_device(adev, uc_info_rx->out_snd_device);
-    enable_audio_route(adev, uc_info_rx);
+    cs35l41_dev->enable_snd_device(adev, uc_info_rx->out_snd_device);
+    cs35l41_dev->enable_audio_route(adev, uc_info_rx);
 
-    pcm_dev_rx_id = platform_get_pcm_device_id(uc_info_rx->id, PCM_PLAYBACK);
+    pcm_dev_rx_id = cs35l41_dev->platform_get_pcm_device_id(uc_info_rx->id, PCM_PLAYBACK);
     ALOGV("%s: pcm device id %d", __func__, pcm_dev_rx_id);
     if (pcm_dev_rx_id < 0) {
         ALOGE("%s: Invalid pcm device for usecase (%d)", __func__, uc_info_rx->id);
@@ -544,8 +542,8 @@ exit:
         handle.pcm_rx = NULL;
     }
 
-    disable_audio_route(adev, uc_info_rx);
-    disable_snd_device(adev, uc_info_rx->out_snd_device);
+    cs35l41_dev->disable_audio_route(adev, uc_info_rx);
+    cs35l41_dev->disable_snd_device(adev, uc_info_rx->out_snd_device);
 
     list_remove(&uc_info_rx->list);
     free(uc_info_rx);
@@ -1142,7 +1140,7 @@ static int cirrus_do_fw_calibration_download(struct cirrus_playback_session* hdl
     return ret;
 }
 
-static void* cirrus_do_calibration() {
+static void* cirrus_do_calibration(UNUSED void* _handle) {
     struct audio_device* adev = cs35l41_dev->adev;
     int ret = 0;
 
@@ -1295,7 +1293,7 @@ success:
     return ret;
 }
 
-static void* cirrus_failure_detect_thread() {
+static void* cirrus_failure_detect_thread(UNUSED void* _handle) {
     ALOGD("%s: Entry", __func__);
 
     (void)cirrus_check_error_fatal();
@@ -1536,6 +1534,30 @@ static int amp_module_open(const hw_module_t* module, const char* name, hw_devic
     cs35l41_dev->amp_dev.out_set_parameters = NULL;
     cs35l41_dev->amp_dev.set_feedback = NULL;
     cs35l41_dev->amp_dev.calibrate = amp_calib;
+
+    if (hw_get_module_by_class(AUDIO_HARDWARE_MODULE_ID, AUDIO_HARDWARE_MODULE_ID_PRIMARY,
+                               &cs35l41_dev->module_ahal)) {
+        ALOGW("%s: Failed to load audio.primary", __func__);
+        return -ENODEV;
+    }
+
+#define LOAD_AHAL_SYMBOL(symbol)                                             \
+    do {                                                                     \
+        cs35l41_dev->symbol = dlsym(cs35l41_dev->module_ahal->dso, #symbol); \
+        if (cs35l41_dev->symbol == NULL) {                                   \
+            ALOGW("%s: %s not found (%s)", __func__, #symbol, dlerror());    \
+            free(cs35l41_dev);                                               \
+            return -ENODEV;                                                  \
+        }                                                                    \
+    } while (0)
+
+    LOAD_AHAL_SYMBOL(enable_snd_device);
+    LOAD_AHAL_SYMBOL(enable_audio_route);
+    LOAD_AHAL_SYMBOL(disable_snd_device);
+    LOAD_AHAL_SYMBOL(disable_audio_route);
+    LOAD_AHAL_SYMBOL(platform_get_pcm_device_id);
+    LOAD_AHAL_SYMBOL(platform_check_and_set_codec_backend_cfg);
+#undef LOAD_AHAL_SYMBOL
 
     *device = (hw_device_t*)cs35l41_dev;
 
