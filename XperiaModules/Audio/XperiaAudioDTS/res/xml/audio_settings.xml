@@ -17,8 +17,8 @@
             android:summary="@string/dtsx_summary"
             android:persistent="false">
             <intent
-                android:targetPackage="com.asus.maxxaudio.audiowizard"
-                android:targetClass="com.asus.maxxaudio.audiowizard.MainActivity" />
+                android:targetPackage="com.dolby.daxappui2"
+                android:targetClass="com.dolby.daxappui2.MainActivity" />
         </Preference>
 
         <Preference
