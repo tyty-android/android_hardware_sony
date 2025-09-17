@@ -4,4 +4,4 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-BOARD_VENDOR_SEPOLICY_DIRS += hardware/sony/XperiaModules/XperiaTouch/sepolicy/vendor
+BOARD_VENDOR_SEPOLICY_DIRS += hardware/sony/XperiaModules/Touch/XperiaTouchSecTS/sepolicy/vendor

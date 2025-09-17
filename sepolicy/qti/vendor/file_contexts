@@ -23,6 +23,11 @@
 /mnt/rca                         u:object_r:idd_rca_dir:s0
 /mnt/rca(/.*)?                   u:object_r:idd_rca_file:s0
 
+# NFC Configs
+/(vendor|odm|vendor/odm)/etc/libnfc-nci\.conf     u:object_r:vendor_nfc_vendor_data_file:s0
+/(vendor|odm|vendor/odm)/etc/libnfc-nxp\.conf     u:object_r:vendor_nfc_vendor_data_file:s0
+/(vendor|odm|vendor/odm)/etc/libnfc-nxp_RF\.conf  u:object_r:vendor_nfc_vendor_data_file:s0
+
 # HALs
 /vendor/bin/hw/android\.hardware\.secure_element-service\.nxp                                  u:object_r:hal_secure_element_default_exec:s0
 /(vendor|odm|vendor/odm)/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service-rbs    u:object_r:hal_fingerprint_default_exec:s0

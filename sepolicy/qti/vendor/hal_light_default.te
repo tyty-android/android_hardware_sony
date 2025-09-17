@@ -1,1 +1,2 @@
 allow hal_light_default sysfs_dp:dir { search open getattr };
+allow hal_light_default sysfs_dp:file r_file_perms;

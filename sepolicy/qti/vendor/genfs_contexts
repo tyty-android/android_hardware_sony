@@ -91,3 +91,10 @@ genfscon sysfs /devices/platform/soc/8c0000.qcom,qupv3_2_geni_se/888000.i2c/i2c-
 # UIM control node
 genfscon sysfs /class/sony_ext_uim_ctrl u:object_r:sysfs_uim_ctrl:s0
 genfscon sysfs /devices/virtual/sony_ext_uim_ctrl/device/ u:object_r:sysfs_uim_ctrl:s0
+
+# UFS
+genfscon sysfs /devices/platform/soc/1d84000.ufshc/host0/target0:0:0/0:0:0:0/block/sda/mq/0/nr_tags u:object_r:vendor_sysfs_mmc_host:s0
+
+
+# discard_max_bytes_File
+genfscon sysfs /sys/block/sda/queue/discard_max_bytes u:object_r:sysfs_discard_config:s0
