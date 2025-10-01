@@ -1,1 +1,3 @@
 sony.screen_brightness    u:object_r:display_brightness_prop:s0
+audio.sys.noisy.broadcast.delay  u:object_r:audio_config_prop:s0 exact int
+audio.sys.offload.pstimeout.secs u:object_r:audio_config_prop:s0 exact int
