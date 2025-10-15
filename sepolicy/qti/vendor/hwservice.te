@@ -9,3 +9,5 @@ type vendor_hal_disp_hwservice, hwservice_manager_type;
 type vendor_hal_idd_hwservice, hwservice_manager_type;
 type vendor_hal_miscta_hwservice, hwservice_manager_type;
 type vendor_hal_secd_hwservice, hwservice_manager_type;
+type hal_mmwave_hwservice, hwservice_manager_type;
+type hal_ifaa_hwservice, hwservice_manager_type;

@@ -12,3 +12,5 @@ vendor.somc.hardware.nfc::ISomcNfc                                u:object_r:hal
 vendor.somc.hardware.radio::ISomcHook                             u:object_r:somc_hw_radio_hwservice:s0
 vendor.somc.hardware.security.secd::IDeviceSecurity               u:object_r:vendor_hal_secd_hwservice:s0
 vendor.somc.hardware.swiqi::IHidlSwiqi                            u:object_r:hal_swiqi_hwservice:s0
+vendor.semc.hardware.mmwavedirection::IMmwavedirection            u:object_r:hal_mmwave_hwservice:s0
+vendor.somc.hardware.ifaa::IIFAAManagerService                    u:object_r:hal_ifaa_hwservice:s0

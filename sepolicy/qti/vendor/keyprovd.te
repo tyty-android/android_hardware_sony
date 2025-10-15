@@ -6,6 +6,7 @@ init_daemon_domain(keyprovd)
 hwbinder_use(keyprovd)
 
 unix_socket_connect(keyprovd, tad, tad)
+unix_socket_connect(keyprovd, property, init)
 
 binder_call(keyprovd, vendor_hal_soter_qti)
 
