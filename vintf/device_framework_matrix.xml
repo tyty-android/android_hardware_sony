@@ -55,6 +55,30 @@
         </interface>
     </hal>
     <hal format="hidl" optional="true">
+        <name>vendor.semc.hardware.mmwavedirection</name>
+        <version>1.0</version>
+        <version>1.1</version>
+        <interface>
+            <name>IMmwavedirection</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>vendor.somc.hardware.aidlifaa</name>
+        <interface>
+            <name>IIFAAManagerService</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
+        <name>vendor.somc.hardware.ifaa</name>
+        <version>1.0</version>
+        <interface>
+            <name>IIFAAManagerService</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
        <name>vendor.semc.hardware.secd</name>
        <version>1.1</version>
        <interface>
