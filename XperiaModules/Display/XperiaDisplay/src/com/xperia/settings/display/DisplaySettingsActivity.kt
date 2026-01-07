@@ -15,7 +15,11 @@ class DisplaySettingsActivity : CollapsingToolbarBaseActivity() {
         super.onCreate(savedInstanceState)
         fragmentManager
                 .beginTransaction()
-                .replace(com.android.settingslib.collapsingtoolbar.R.id.content_frame, DisplaySettingsFragment(), TAG)
+                .replace(
+                    com.android.settingslib.collapsingtoolbar.R.id.content_frame,
+                    DisplaySettingsFragment(),
+                    TAG,
+                )
                 .commit()
     }
 
