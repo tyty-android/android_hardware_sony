@@ -59,6 +59,8 @@
 /dev/pn553                                                     u:object_r:nfc_device:s0
 /dev/socket/idd(/.*)?                                          u:object_r:idd_socket_file:s0
 /dev/socket/tad                                                u:object_r:tad_socket:s0
+/dev/block/platform/soc/1d84000.ufshc/by-name/oem_[ab]         u:object_r:boot_block_device:s0
+/dev/block/platform/soc/4804000.ufshc/by-name/oem_[ab]         u:object_r:boot_block_device:s0
 
 # Fingerprint devices
 /dev/esfp0    u:object_r:etsd_device:s0
