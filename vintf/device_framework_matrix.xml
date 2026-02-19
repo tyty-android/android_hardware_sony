@@ -118,6 +118,15 @@
             <instance>default</instance>
         </interface>
     </hal>
+    <hal format="aidl" optional="true">
+        <name>vendor.somc.hardware.aidlradio</name>
+        <version>1</version>
+        <interface>
+            <name>ISomcHook</name>
+            <instance>somchook0</instance>
+            <instance>somchook1</instance>
+        </interface>
+    </hal>
     <hal format="hidl" optional="true">
         <name>vendor.somc.hardware.miscta</name>
         <version>1.0</version>
@@ -141,6 +150,14 @@
             <name>ISomcHook</name>
             <instance>somchook</instance>
             <instance>somchook2</instance>
+        </interface>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>vendor.somc.hardware.security.aidlsecd</name>
+        <version>1</version>
+        <interface>
+            <name>IDeviceSecurity</name>
+            <instance>default</instance>
         </interface>
     </hal>
     <hal format="hidl" optional="true">
