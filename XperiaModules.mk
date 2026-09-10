@@ -64,22 +64,6 @@ include hardware/sony/XperiaModules/Touch/XperiaTouchLXSTS/sepolicy/SEPolicy.mk
 	XperiaTouchOverlay
 endif
 
-ifeq ($(TARGET_SUPPORTS_SOUND_ENHANCEMENT),true)
-	PRODUCT_PACKAGES += XperiaAudio
-endif
-
-ifeq ($(TARGET_SUPPORTS_SOUND_ENHANCEMENT_ADDON),true)
-	PRODUCT_PACKAGES += \
-	XperiaAudioPlus \
-	XperiaAudioAddon
-endif
-
-ifeq ($(TARGET_SUPPORTS_SOUND_ENHANCEMENT_DTS),true)
-	PRODUCT_PACKAGES += \
-	XperiaAudioDTS \
-	XperiaTSRA
-endif
-
 ifeq ($(TARGET_SUPPORTS_EUICC),true)
 	PRODUCT_PACKAGES += XperiaEuicc
 endif
