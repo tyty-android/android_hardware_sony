@@ -5,3 +5,8 @@ allow vendor_qti_init_shell sysfs_devices_block:file rw_file_perms;
 
 allow vendor_qti_init_shell sysfs:file rw_file_perms;
 allow vendor_qti_init_shell sysfs_lru_gen_enabled:file rw_file_perms;
+
+allow vendor_qti_init_shell proc_dirty:file rw_file_perms;
+allow vendor_qti_init_shell sysfs_sync_on_suspend:file rw_file_perms;
+allow vendor_qti_init_shell debugfs_tracing:file rw_file_perms;
+allow vendor_qti_init_shell vendor_sysfs_scsi_host:file rw_file_perms;
