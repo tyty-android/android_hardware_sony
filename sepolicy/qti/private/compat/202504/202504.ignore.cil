@@ -7,4 +7,5 @@
   ( new_objects
     devicesetting_app
     display_brightness_prop
-    hal_swiqi_service))
+    hal_swiqi_service
+    proximity_sensor_prop))
