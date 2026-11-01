@@ -10,7 +10,7 @@ import android.hardware.display.ColorDisplayManager
 import android.os.ServiceManager
 import android.provider.Settings
 import android.util.Log
-import com.android.internal.lineage.hardware.LiveDisplayManager;
+import lineageos.hardware.LiveDisplayManager
 import vendor.semc.hardware.aidldisplay.IDisplay as IAidlDisplay
 import vendor.semc.hardware.aidldisplay.IDisplayCallback as IAidlDisplayCallback
 import vendor.semc.hardware.aidldisplay.PccMatrix as AidlPccMatrix
