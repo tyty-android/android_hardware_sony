@@ -7,6 +7,7 @@ genfscon sysfs /class/battman_dbg u:object_r:sysfs_battchg_ext:s0
 genfscon sysfs /class/battchg_ext/smart_charging_status u:object_r:vendor_sysfs_battery_supply:s0
 genfscon sysfs /class/battchg_ext/smart_charging_interruption u:object_r:vendor_sysfs_battery_supply:s0
 genfscon sysfs /devices/platform/soc/4a80000.i2c/i2c-3/3-0049/power_supply/battery u:object_r:vendor_sysfs_battery_supply:s0
+genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pm8150b@2:qcom,qpnp-smb5/power_supply/battery/smart_charging_status u:object_r:vendor_sysfs_battery_supply:s0
 genfscon sysfs /devices/platform/soc/4a80000.i2c/i2c-3/3-0049/power_supply/pc_port u:object_r:vendor_sysfs_usb_supply:s0
 genfscon sysfs /devices/platform/soc/4a80000.i2c/i2c-3/3-0049/power_supply/sm5038-otg u:object_r:vendor_sysfs_usb_supply:s0
 genfscon sysfs /devices/platform/soc/4c84000.i2c/i2c-0/0-0033/power_supply/usb u:object_r:vendor_sysfs_usb_supply:s0
