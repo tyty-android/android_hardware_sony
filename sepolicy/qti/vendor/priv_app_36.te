@@ -1,4 +1,5 @@
 allow priv_app_36 vendor_hal_idd_hwservice:hwservice_manager find;
+allow priv_app_36 hal_miscta_service:service_manager find;
 allow priv_app_36 hal_swiqi_service:service_manager find;
 
 binder_call(priv_app_36, vendor_hal_idd_default);
